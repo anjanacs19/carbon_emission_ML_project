@@ -1,0 +1,56 @@
+# ------------------------
+# Python cache & compiled files
+# ------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ------------------------
+# Virtual environments
+# ------------------------
+env/
+venv/
+.venv/
+
+# ------------------------
+# Jupyter Notebook checkpoints
+# ------------------------
+.ipynb_checkpoints/
+
+# ------------------------
+# ML Model files (large)
+# ------------------------
+*.pkl
+*.joblib
+*.h5
+*.onnx
+
+# ------------------------
+# Dataset files (if large)
+# ------------------------
+*.csv
+*.xlsx
+*.json
+data/
+datasets/
+data/carbon_data.csv
+carbon_emission_dataset.csv
+# ------------------------
+# Logs and temporary files
+# ------------------------
+logs/
+*.log
+*.tmp
+
+# ------------------------
+# OS-specific files
+# ------------------------
+.DS_Store
+Thumbs.db
+
+# ------------------------
+# Git LFS tracking (optional, if used)
+# ------------------------
+# Example: track all .pkl files via LFS
+*.pkl filter=lfs diff=lfs merge=lfs -text
