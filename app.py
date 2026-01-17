@@ -11,58 +11,81 @@ st.set_page_config(page_title="CarbonSight", layout="wide")
 
 st.markdown("""
 <style>
-header, footer, #MainMenu {visibility: hidden;}
+header,footer, #MainMenu {visibility: hidden;}
+# /* Visually hide header but KEEP sidebar arrow */
+# header {
+#     height: 0px !important;
+#     padding: 0 !important;
+#     margin: 0 !important;
+#     background: transparent !important;
+# }
+
+# /* Sidebar toggle arrow (reopen button) */
+# button[data-testid="stSidebarToggleButton"] {
+#     position: fixed;
+#     top: 12px;
+#     left: 12px;
+#     z-index: 9999;
+#     opacity: 0.85;
+# }
 .stApp {background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);}
 [data-testid="stSidebar"] {background: linear-gradient(180deg, #1a1a2e, #16213e);}
 h1, h2, h3 {color: white !important;}
 
 
-    .stFormSubmitButton > button {
-        background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%) !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 8px !important;
-        padding: 12px 30px !important;
-        font-size: 16px !important;
-        font-weight: 600 !important;
-        width: auto !important;
-        min-width: 200px !important;
-        transition: all 0.3s !important;
-    }
-    
-    .stFormSubmitButton > button:hover {
-        background: linear-gradient(135deg, #ff5252 0%, #ff3838 100%) !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3) !important;
-    }
+/* FORM SUBMIT BUTTON (prediction page) */
+.stFormSubmitButton > button {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 12px 30px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    width: auto !important;
+    min-width: 200px !important;
+    transition: all 0.3s !important;
+}
+.stFormSubmitButton > button:hover {
+    background: linear-gradient(135deg, #43A047 0%, #1B5E20 100%) !important; /* darker green hover */
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(50, 205, 50, 0.3) !important;
+}
 
+/* REGULAR PRIMARY BUTTONS (like Analyze Target / Compare Scenarios) */
+.stButton>button[kind="primary"] {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 12px 20px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    transition: all 0.3s !important;
+}
+.stButton>button[kind="primary"]:hover {
+    background: linear-gradient(135deg, #43A047 0%, #1B5E20 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(50, 205, 50, 0.3) !important;
+}
 
-
-/* Base sidebar button style */
-.sidebar-btn {
-    padding: 10px;
+/* Sidebar active button (current page) */
+.sidebar-btn.active {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%) !important;
+    border: 1px solid #32cd32 !important;
+    color: white !important;
+    padding: 12px;
     border-radius: 6px;
     text-align: center;
-    margin: 5px 0;
+    margin: 6px 0;
     font-weight: 600;
     cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: #dddddd;
-    background: transparent;
-}
-
-/* Active (current page) button */
-.sidebar-btn.active {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
-    border: 1px solid #ff6b6b;
-    color: white;
 }
 
 
-    
+   
 </style>
 """, unsafe_allow_html=True)
-
 # -------------------------------------------------
 # LOAD DATA / MODEL / ENCODERS
 # -------------------------------------------------
@@ -319,8 +342,8 @@ if st.session_state.page == "prediction":
             </div>
             """, unsafe_allow_html=True)
             
-            st.session_state["baseline_emission"] = prediction
-            st.session_state["renewable_share"] = renewable_pct
+        st.session_state["baseline_emission"] = prediction
+        st.session_state["renewable_share"] = renewable_pct
 
 
 
@@ -477,22 +500,22 @@ elif st.session_state.page == "target":
             # -----------------------------
             # BAR CHART
             # -----------------------------
-            st.markdown("### 📈 Visual Comparison")
+            # st.markdown("### 📈 Visual Comparison")
 
-            fig, ax = plt.subplots()
-            ax.bar(
-                df_res["Scenario"],
-                df_res["Emission (tCO₂e)"]
-            )
-            ax.set_ylabel("Emission (tCO₂e)")
-            ax.set_title("Scenario Emission Comparison")
-            st.pyplot(fig)
+            # fig, ax = plt.subplots()
+            # ax.bar(
+            #     df_res["Scenario"],
+            #     df_res["Emission (tCO₂e)"]
+            # )
+            # ax.set_ylabel("Emission (tCO₂e)")
+            # ax.set_title("Scenario Emission Comparison")
+            # st.pyplot(fig)
             
             
-            st.caption(
-                "⚠️ Scenario analysis is **strategic estimation**, "
-                "baseline emission is ML-predicted."
-            )
+            # st.caption(
+            #     "⚠️ Scenario analysis is **strategic estimation**, "
+            #     "baseline emission is ML-predicted."
+            # )
 
 
             # -----------------------------
